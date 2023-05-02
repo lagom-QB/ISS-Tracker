@@ -1,32 +1,31 @@
-name: Continuous Execution
+name: Python Script Output
 
 on:
-  push:
-    branches:
-      - main
+  schedule:
+    - cron: '*/1 * * * *'  # Run every 10 minutes
 
 jobs:
-  run_script:
+  build:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+    - name: Checkout code
+      uses: actions/checkout@v2
 
-      - name: Setup Python 3
-        uses: actions/setup-python@v2
-        with:
-          python-version: 3.9
+    - name: Install dependencies
+      run: |
+        python3 -m pip install --upgrade pip
+        pip install -r requirements.txt
 
-      - name: Install Python dependencies
-        run: pip install -r requirements.txt
+    - name: Run Python script and save output as image
+      run: |
+        python3 iss_tracker.py
+        convert output.png -resize 1000x1000 output_small.png
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Run script
-        run: python iss_tracker.py > output.png
-
-      - name: Commit changes
-        uses: stefanzweifel/git-auto-commit-action@v4
-        with:
-          commit_message: "Update output.png"
-          commit_options: '--no-verify'
-          file_pattern: 'output.png'
-          branch: main
+    - name: Upload image as artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: output
+        path: output_small.png
