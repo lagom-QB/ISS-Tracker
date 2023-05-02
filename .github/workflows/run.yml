@@ -23,15 +23,33 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: '3.9'
+      
+      - name: Check verions
+        run: |
+          echo node --version
+          echo npm --version
+          echo python --version
+          echo pip --version
 
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip --version
-          pip install -r scripts/requirements.txt
+          if [ -f "scripts/requirements.txt" ]; then 
+            echo "requirements.txt found"; 
+            pip install -r scripts/requirements.txt
+          else 
+            echo "requirements.txt not found"; 
+          fi
 
-      - name: Run ISS tracker
-        run: python3 scripts/iss_tracker.py
+      - name: Check then run ISS tracker
+        run: | 
+          if [ -f "scripts/iss_tracker.py" ]; then 
+            echo "iss_tracker.py found"; 
+            python3 scripts/iss_tracker.py
+          else 
+            echo "iss_tracker.py not found"; 
+          fi
+          
 
       - name: Save output image
         uses: actions/upload-artifact@v2
