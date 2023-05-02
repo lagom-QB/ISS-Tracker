@@ -1,16 +1,32 @@
-name: Run every 5 seconds
+name: Continuous Execution
+
 on:
-  schedule:
-    - cron: '*/5 * * * * *'
+  push:
+    branches:
+      - main
+
 jobs:
-  run:
+  run_script:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+
+      - name: Setup Python 3
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+
+      - name: Install Python dependencies
+        run: pip install -r requirements.txt
+
       - name: Run script
-        run: |
-          while true; do
-            python iss_tracker.py > output.png
-            sleep 5
-          done
+        run: python iss_tracker.py > output.png
+
+      - name: Commit changes
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: "Update output.png"
+          commit_options: '--no-verify'
+          file_pattern: 'output.png'
+          branch: main
