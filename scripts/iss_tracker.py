@@ -180,7 +180,7 @@ def drawMapWithPrettymaps(location, radius = 1000):
         ax.text(0.83, 0.10, "\n".join(craft_dict['Shenzhou 15']) ,fontsize=9)
         ax.tick_params(axis='both', which='both', colors='white', labelsize=.1)
 
-        plt.savefig('res/map.png', bbox_inches='tight', pad_inches=0, facecolor='#a1e3ff')
+        # plt.savefig('res/map.png', bbox_inches='tight', pad_inches=0, facecolor='#a1e3ff')
         
         return fig, ax
     else:
@@ -207,7 +207,7 @@ def drawMapWithPrettymaps(location, radius = 1000):
 
         plt.show()
         
-        plt.savefig('res/map.png', bbox_inches='tight', pad_inches=0, facecolor='#a1e3ff')
+        # plt.savefig('res/map.png', bbox_inches='tight', pad_inches=0, facecolor='#a1e3ff')
         return fig, ax
 
 location = get_iss_position()

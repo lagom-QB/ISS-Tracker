@@ -20,10 +20,10 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -r requirements.txt
+          pip install -r scripts/requirements.txt
 
       - name: Run ISS tracker
-        run: python iss_tracker.py
+        run: python3 scripts/iss_tracker.py
 
       - name: Save output image
         uses: actions/upload-artifact@v2
