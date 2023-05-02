@@ -11,6 +11,6 @@ jobs:
       - name: Run script
         run: |
           while true; do
-            python iss_tracker.py
+            python iss_tracker.py > output.png
             sleep 5
           done
