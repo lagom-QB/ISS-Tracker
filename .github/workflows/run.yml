@@ -1,31 +1,31 @@
-name: Python Script Output
+name: Run Python Script Automatically Every Minute
 
 on:
-  schedule:
-    - cron: '*/1 * * * *'  # Run every 10 minutes
+  push:
+    branches:
+      - main
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-
+    - uses: actions/checkout@v2
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
     - name: Install dependencies
       run: |
-        python3 -m pip install --upgrade pip
+        python -m pip install --upgrade pip
         pip install -r requirements.txt
-
-    - name: Run Python script and save output as image
+    - name: Run ISS Tracker
       run: |
-        python3 iss_tracker.py
-        convert output.png -resize 1000x1000 output_small.png
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-    - name: Upload image as artifact
+        while true; do
+          python iss_tracker.py
+          sleep 10
+        done
+    - name: Save Output Figure
       uses: actions/upload-artifact@v2
       with:
-        name: output
-        path: output_small.png
+        name: output-figure
+        path: output.png
