@@ -14,3 +14,6 @@ Steps:
 - Use SQL and pandas to perform more advanced analysis of the data, such as calculating summary statistics or identifying correlations between features.  
 - Use prettymaps to customize and display the map.  
 - Upload project and use github actions to run the script.  
+
+
+![ISS Tracker Output Figure](https://github.com/lagom-QB/ISS-Tracker/raw/main/.github/workflows/output-figure/output.png)
