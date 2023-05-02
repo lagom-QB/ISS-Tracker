@@ -23,18 +23,11 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: '3.9'
-      
-      - name: Check versions
-        run: |        
-          echo "node --version"
-          echo "npm --version"
-          echo "python --version"
-          echo "pip --version"
 
       - name: Install Carbon headers
         run: |
-          sudo apt-get update
-          sudo apt-get install -y libcairo2-dev libjpeg-dev libgif-dev
+          python -m pip install --upgrade pip
+          pip install -y libcairo2-dev libjpeg-dev libgif-dev
           pip install pyobjc-framework-Cocoa==6.0.1
 
       - name: Install dependencies
