@@ -32,10 +32,10 @@ jobs:
         # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Check then run ISS tracker
-        run: | 
-          if [ -f "scripts/iss_tracker.py" ]; then 
-            echo "iss_tracker.py found"; 
-            python3 scripts/iss_tracker.py
-          else 
-            echo "iss_tracker.py not found"; 
-          fi
+      run: | 
+        if [ -f "scripts/iss_tracker.py" ]; then 
+          echo "iss_tracker.py found"; 
+          python3 scripts/iss_tracker.py
+        else 
+          echo "iss_tracker.py not found"; 
+        fi
