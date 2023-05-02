@@ -1,4 +1,4 @@
-name: Rerun Script
+name: Scheduled re-run
 
 on:
   schedule:
@@ -24,7 +24,7 @@ jobs:
         with:
           python-version: '3.9'
       
-      - name: Check verions
+      - name: Check versions
         run: |        
           echo "node --version"
           echo "npm --version"
