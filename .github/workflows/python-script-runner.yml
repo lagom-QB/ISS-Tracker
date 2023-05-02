@@ -32,7 +32,7 @@ jobs:
         then
           echo "All required packages were installed."
         else
-          echo "Some required packages were not installed."
+          diff -u scripts/requirements.txt scripts/installed_packages.txt | grep "^-[^-]" | cut -c 2- | xargs -n 1 echo "Package not installed: "
           exit 1
         fi
     - name: Lint with flake8
