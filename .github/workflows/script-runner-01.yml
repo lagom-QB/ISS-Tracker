@@ -5,7 +5,7 @@ on:
     - cron: '*/1 * * * *' # Schedule to run every minute, regardless of push
 
 jobs:
-  build:
+  run_iss_tracker:
     runs-on: ubuntu-latest
 
     steps:
