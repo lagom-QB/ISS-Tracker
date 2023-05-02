@@ -5,7 +5,7 @@ on:
     - cron: '*/1 * * * *' # Schedule to run every minute, regardless of push
 
 jobs:
-  run_iss_tracker:
+  build:
     runs-on: ubuntu-latest
 
     steps:
@@ -19,10 +19,10 @@ jobs:
         with:
           node-version: '16.x'
 
-      - name: Set up Python environment
-        uses: actions/setup-python@v2
+      - name: Set up Python 3.10
+        uses: actions/setup-python@v3
         with:
-          python-version: '3.9'
+          python-version: "3.10"
 
       - name: Install Carbon headers
         run: |
