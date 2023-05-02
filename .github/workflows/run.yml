@@ -1,31 +1,32 @@
-name: Run Python Script Automatically Every Minute
+name: Rerun Script Every Minute
 
 on:
-  push:
-    branches:
-      - main
+  schedule:
+    - cron: '*/1 * * * *' # Schedule to run every minute, regardless of push
 
 jobs:
-  build:
+  run_iss_tracker:
     runs-on: ubuntu-latest
+
     steps:
-    - uses: actions/checkout@v2
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: '3.x'
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
-    - name: Run ISS Tracker
-      run: |
-        while true; do
-          python iss_tracker.py
-          sleep 10
-        done
-    - name: Save Output Figure
-      uses: actions/upload-artifact@v2
-      with:
-        name: output-figure
-        path: output.png
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Python environment
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.9'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run ISS tracker
+        run: python iss_tracker.py
+
+      - name: Save output image
+        uses: actions/upload-artifact@v2
+        with:
+          name: iss-tracker-image
+          path: output.png
