@@ -25,17 +25,17 @@ jobs:
           python-version: '3.9'
       
       - name: Check verions
-        run: |
-          echo node --version
-          echo npm --version
-          echo python --version
-          echo pip --version
+        run: |        
+          echo "node --version"
+          echo "npm --version"
+          echo "python --version"
+          echo "pip --version"
 
       - name: Install Carbon headers
         run: |
           sudo apt-get update
           sudo apt-get install -y libcairo2-dev libjpeg-dev libgif-dev
-
+          pip install pyobjc-framework-Cocoa==6.0.1
 
       - name: Install dependencies
         run: |
