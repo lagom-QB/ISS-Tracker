@@ -1,4 +1,4 @@
-name: Run Python Script Automatically Every Minute
+name: Rerun Script Every Minute
 
 on:
   schedule:
