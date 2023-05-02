@@ -27,8 +27,8 @@ jobs:
         if [ -f script/requirements.txt ]; then pip install -r scripts/requirements.txt; fi
     - name: Check installed packages
       run: |
-        pip list > installed_packages.txt
-        if grep -Fxq -f requirements.txt installed_packages.txt
+        pip list > scripts/installed_packages.txt
+        if grep -Fxq -f scripts/requirements.txt scripts/installed_packages.txt
         then
           echo "All required packages were installed."
         else
