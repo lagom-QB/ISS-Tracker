@@ -1,4 +1,4 @@
-name: Rerun Script Every Minute
+name: Rerun Script
 
 on:
   schedule:
