@@ -24,6 +24,7 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install --upgrade wheel
+        pip install --no-binary :all: pyproject-toml
         pip install --no-binary :all: appscript
         pip install --no-cache-dir -r scripts/requirements.txt
         pip install flake8 pytest
