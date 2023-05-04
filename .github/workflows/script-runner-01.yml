@@ -36,6 +36,7 @@ jobs:
           if [ -f "scripts/requirements.txt" ]; then 
             echo "requirements.txt found"; 
             pip install --upgrade wheel
+            pip install --upgrade ipykernel
             pip install -r scripts/requirements.txt
           else 
             echo "requirements.txt not found"; 
