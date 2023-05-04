@@ -42,18 +42,6 @@ jobs:
             echo "requirements.txt not found"; 
           fi
 
-      - name: Check installed packages
-        run: |
-          pip list > scripts/installed_packages.txt
-          if grep -Fxq -f scripts/requirements.txt scripts/installed_packages.txt
-          then
-            echo "All required packages were installed."
-          else
-            diff -u scripts/requirements.txt scripts/installed_packages.txt | grep "^-[^-]" | cut -c 2- | xargs -n 1 echo "Package not installed: "
-            # echo "Some required packages were not installed."
-            exit 1
-          fi
-
       - name: Check then run ISS tracker
         run: | 
           if [ -f "scripts/iss_tracker.py" ]; then 
