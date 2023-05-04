@@ -36,8 +36,6 @@ jobs:
           if [ -f "scripts/requirements.txt" ]; then 
             echo "requirements.txt found"; 
             pip install --upgrade wheel
-            pip install --no-binary :all: pyproject-toml
-            pip install --no-binary :all: appscript
             pip install -r scripts/requirements.txt
           else 
             echo "requirements.txt not found"; 
