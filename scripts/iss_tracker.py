@@ -180,9 +180,6 @@ def drawMapWithPrettymaps(location, radius = 1000):
         ax.text(0.83, 0.10, "\n".join(craft_dict['Shenzhou 15']) ,fontsize=9)
         ax.tick_params(axis='both', which='both', colors='white', labelsize=.1)
 
-        # plt.savefig('map.png', bbox_inches='tight', pad_inches=0, facecolor='#a1e3ff')
-        plt.savefig('output.png')
-        
         return fig, ax
     else:
         # Return a blue square via matplotlib with the coordinates at the bottom left
@@ -206,12 +203,15 @@ def drawMapWithPrettymaps(location, radius = 1000):
         ax.spines['bottom'].set_visible(False)
         ax.spines['left'].set_visible(False)
 
-        plt.show()
+        # plt.show()
         
-        #plt.savefig('map.png', bbox_inches='tight', pad_inches=0, facecolor='#a1e3ff')
-        plt.savefig('output.png')
         return fig, ax
 
 location = get_iss_position()
 # print(location,'\n\n')
-drawMapWithPrettymaps(location)
+
+img, _ = drawMapWithPrettymaps(location)
+img.savefig('output.png',dpi=300, transparent=False, bbox_inches='tight', pad_inches=0)
+plt.show()
+
+print(type(img))
