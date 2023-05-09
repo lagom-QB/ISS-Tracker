@@ -1,4 +1,4 @@
-# Internationanl Space Station tracker
+# International Space Station tracker
 
 The goal of this project was to work on an introductory data engineering challenge.  
 
