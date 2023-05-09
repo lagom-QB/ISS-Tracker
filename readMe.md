@@ -16,4 +16,4 @@ Steps:
 - Upload project and use github actions to run the script.  
 
 
-![ISS Tracker Output Figure](https://github.com/lagom-QB/ISS-Tracker/raw/main/.github/workflows/output-figure/output.png)
+![ISS Tracker Output Figure](https://raw.githubusercontent.com/lagom-QB/ISS-Tracker/master/output.png)
