@@ -1,11 +1,11 @@
 # International Space Station tracker
 
-The goal of this project was to work on an introductory data engineering challenge.  
+I'm doing this project to work on an introductory data engineering challenge.  
 
-In this project, I want to build a data pipeline that retrieves real-time data from a public API, processes and formats the data, and stores it for easy access and querying.  
-I will use Python and tools such as pandas, SQLAlchemy, and GitHub to build and run the pipeline.  
+In this project, I want to automatically retrieves real-time data from a public API, process and format it, then store it for easy access and querying.  
+I will use tools such as pandas and GitHub to build and run the pipeline.  
 
-Steps:  
+_Steps_:  
 - Find a public API that provides real-time data without the need for registration.  
     [Open-Notify-API](!http://open-notify.org/Open-Notify-API/) is an API put together by Nathan Bergey to provide services which include showing the [current position of the ISS in space](!http://api.open-notify.org/iss-now.json) and the [current number of people in space](!http://api.open-notify.org/astros.json). 
 - Use Python and requests to retrieve the data from the API, and transform it into a format that is suitable for storage and analysis. This can involve cleaning the data, normalizing the data, or converting the data to a different format.  
@@ -16,5 +16,5 @@ Steps:
 - Upload project and use github actions to run the script.  
 
 ## Current location of the ISS
----
+
 ![ISS Tracker Output Figure](https://raw.githubusercontent.com/lagom-QB/ISS-Tracker/master/output.png)
