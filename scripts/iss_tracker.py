@@ -211,7 +211,7 @@ location = get_iss_position()
 # print(location,'\n\n')
 
 img, _ = drawMapWithPrettymaps(location)
-img.savefig('output.png',dpi=300, transparent=False, bbox_inches='tight', pad_inches=0)
+img.savefig('output.png',dpi=300, bbox_inches='tight', pad_inches=0)
 plt.show()
 
 print(type(img))
