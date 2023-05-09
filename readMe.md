@@ -15,5 +15,6 @@ Steps:
 - Use prettymaps to customize and display the map.  
 - Upload project and use github actions to run the script.  
 
-
+## Current location of the ISS
+---
 ![ISS Tracker Output Figure](https://raw.githubusercontent.com/lagom-QB/ISS-Tracker/master/output.png)
