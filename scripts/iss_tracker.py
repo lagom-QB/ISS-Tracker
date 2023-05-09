@@ -109,8 +109,8 @@ def drawSea(location, people, craft_dict):
     ax.spines['left'].set_visible(False)
     
     plt.show()
-    fig.savefig('output.jpg', dpi=10,  bbox_inches='tight', papertype='letter',pad_inches=0.1,
-          facecolor='auto', edgecolor='auto', orientation='landscape')
+    fig.savefig('output.jpg', dpi=10,  bbox_inches='tight', pad_inches=0.1,
+          facecolor='auto', edgecolor='auto', orientation='landscape') #papertype='letter',
     # return fig, ax No need to return anything !!!
 
 def drawLand(location, radius, plot_layers, plot_style, people, craft_dict):
@@ -167,8 +167,8 @@ def drawLand(location, radius, plot_layers, plot_style, people, craft_dict):
     ax.tick_params(axis='both', which='both', colors='white', labelsize=1)
 
     plt.show()
-    fig.savefig('output.jpg', dpi=10,  bbox_inches='tight', papertype='letter',pad_inches=0.1,
-          facecolor='auto', edgecolor='auto', orientation='landscape')
+    fig.savefig('output.jpg', dpi=10,  bbox_inches='tight', pad_inches=0.1,
+          facecolor='auto', edgecolor='auto', orientation='landscape') #papertype='letter',
     
     # return fig, ax No need to return anything !!!
 
@@ -291,5 +291,5 @@ location = get_iss_position()
 
 drawMapWithPrettymaps(location)
 # img, ax = drawMapWithPrettymaps(location)
-# img.savefig('output.jpg', dpi=10,  bbox_inches='tight', papertype='letter',pad_inches=0.1,
-#           facecolor='auto', edgecolor='auto', orientation='landscape')
+# img.savefig('output.jpg', dpi=10,  bbox_inches='tight', pad_inches=0.1,
+#           facecolor='auto', edgecolor='auto', orientation='landsca #papertype='letter',pe')
