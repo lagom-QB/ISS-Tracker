@@ -111,7 +111,7 @@ def drawSea(location, people, craft_dict):
     plt.show()
     fig.savefig('output.jpg', dpi=10,  bbox_inches='tight', papertype='letter',pad_inches=0.1,
           facecolor='auto', edgecolor='auto', orientation='landscape')
-    return fig, ax
+    # return fig, ax No need to return anything !!!
 
 def drawLand(location, radius, plot_layers, plot_style, people, craft_dict):
     fig, ax = plt.subplots()#figsize=(10, 8)
@@ -170,7 +170,7 @@ def drawLand(location, radius, plot_layers, plot_style, people, craft_dict):
     fig.savefig('output.jpg', dpi=10,  bbox_inches='tight', papertype='letter',pad_inches=0.1,
           facecolor='auto', edgecolor='auto', orientation='landscape')
     
-    return fig, ax
+    # return fig, ax No need to return anything !!!
 
 def drawMapWithPrettymaps(location, radius = 7000):
     '''Returns a map of the location with prettymaps or Just a blue map and the coordinates if the location is in the ocean'''
