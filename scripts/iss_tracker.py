@@ -51,70 +51,41 @@ def checkOcean(lat, lon):
             else:
                 # print(f"Attempt: {attempt_count}, \n Address: {curr_location.address}, \n Not in ocean")
                 return False
+            
 def drawSea(location, people, craft_dict):
     print(f"{location} is in the ocean")
 
     fig, ax = plt.subplots(figsize=(10, 8))
     ax.set_facecolor('#00aa99')
     # print coordinates at the bottom left
-    ax.text(0.63, 
-            0.97, 
-            (float(location[0]), float(location[1])),
-            fontfamily = 'monospace', 
-            fontsize=16
-             )#fontsize=18
-    ax.text(0.83, 
-            0.95, 
-            f" In the sea",
-            fontfamily = 'monospace', 
-            fontsize=10
-            )
-    ax.tick_params(axis='both', which='both', colors='white', labelsize=1)
+    ax.text(0.63, 0.97, f"({float(location[0])}, {float(location[1])})",
+            fontfamily='monospace', fontsize=12)
+    ax.text(0.83, 0.95, "In the sea", fontfamily='monospace', fontsize=8)
+    ax.tick_params(axis='both', which='both', colors='white', labelsize=6)
     # print the number of people and the names of the people in the bottom left
-    ax.text(0.63, 
-            0.17, 
-            f"{len(people)} people in the ISS\n" ,
-            fontfamily = 'monospace', 
-            fontsize=14
-            ) 
-    ax.text(0.63, 
-            0.14, 
-            f'ISS\n' ,
-            fontfamily = 'monospace', 
-            fontsize=12
-            )
-    ax.text(0.83, 
-            0.14, 
-            f'Shenzhou 15\n' ,
-            fontfamily = 'monospace', 
-            fontsize=12
-            )
-    ax.text(0.63, 
-            0.02, 
-            "\n".join(craft_dict['ISS']) ,
-            fontfamily = 'monospace', 
-            fontsize=8
-            )
-    ax.text(0.83, 
-            0.10, 
-            "\n".join(craft_dict['Shenzhou 15']) ,
-            fontfamily = 'monospace', 
-            fontsize=8
-            )
-    ax.tick_params(axis='both', which='both', colors='white', labelsize=1)
+    ax.text(0.63, 0.17, f"{len(people)} people in the ISS\n",
+            fontfamily='monospace', fontsize=10)
+    ax.text(0.63, 0.14, "ISS\n", fontfamily='monospace', fontsize=9)
+    ax.text(0.83, 0.14, "Shenzhou 15\n", fontfamily='monospace', fontsize=9)
+    ax.text(0.63, 0.02, "\n".join(craft_dict['ISS']),
+            fontfamily='monospace', fontsize=6)
+    ax.text(0.83, 0.10, "\n".join(craft_dict['Shenzhou 15']),
+            fontfamily='monospace', fontsize=6)
+    ax.tick_params(axis='both', which='both', colors='white', labelsize=6)
     # Remove the border
     ax.spines['top'].set_visible(False)
     ax.spines['right'].set_visible(False)
     ax.spines['bottom'].set_visible(False)
     ax.spines['left'].set_visible(False)
-    
+
+    plt.savefig('output.jpg', dpi=10, bbox_inches='tight', pad_inches=0,
+                facecolor='auto', edgecolor='auto')
     plt.show()
-    fig.savefig('output.jpg', dpi=10,  bbox_inches='tight', pad_inches=0.1,
-          facecolor='auto', edgecolor='auto', orientation='landscape') #papertype='letter',
-    # return fig, ax No need to return anything !!!
+
+    return #fig, ax No need to return anything !!!
 
 def drawLand(location, radius, plot_layers, plot_style, people, craft_dict):
-    fig, ax = plt.subplots()#figsize=(10, 8)
+    fig, ax = plt.subplots(figsize=(8, 6))#
     ax.set_axis_off()
     map = plot(
         query = (float(location[0]), float(location[1])),
@@ -167,12 +138,11 @@ def drawLand(location, radius, plot_layers, plot_style, people, craft_dict):
     ax.tick_params(axis='both', which='both', colors='white', labelsize=1)
 
     plt.show()
-    fig.savefig('output.jpg', dpi=10,  bbox_inches='tight', pad_inches=0.1,
-          facecolor='auto', edgecolor='auto', orientation='landscape') #papertype='letter',
+    fig.savefig('output.jpg', dpi=100, pad_inches=0) #papertype='letter',bbox_inches='tight',
     
-    # return fig, ax No need to return anything !!!
+    return #fig, ax No need to return anything !!!
 
-def drawMapWithPrettymaps(location, radius = 7000):
+def drawMapWithPrettymaps(location, radius = 15000):
     '''Returns a map of the location with prettymaps or Just a blue map and the coordinates if the location is in the ocean'''
     if location is None:
         raise ValueError("Location cannot be None")
@@ -291,5 +261,5 @@ location = get_iss_position()
 
 drawMapWithPrettymaps(location)
 # img, ax = drawMapWithPrettymaps(location)
-# img.savefig('output.jpg', dpi=10,  bbox_inches='tight', pad_inches=0.1,
+# img.savefig('output.jpg', dpi=10,  bbox_inches='tight', pad_inches=1,
 #           facecolor='auto', edgecolor='auto', orientation='landsca #papertype='letter',pe')
