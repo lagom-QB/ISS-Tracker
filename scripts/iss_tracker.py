@@ -63,7 +63,7 @@ def drawSea(location, people, craft_dict):
     ax.text(0.83, 0.95, "In the sea", fontfamily='monospace', fontsize=8)
     ax.tick_params(axis='both', which='both', colors='white', labelsize=6)
     # print the number of people and the names of the people in the bottom left
-    ax.text(0.63, 0.17, f"{len(people)} people in the ISS\n",
+    """ax.text(0.63, 0.17, f"{len(people)} people in the ISS\n",
             fontfamily='monospace', fontsize=10)
     ax.text(0.63, 0.14, "ISS\n", fontfamily='monospace', fontsize=9)
     ax.text(0.83, 0.14, "Shenzhou 15\n", fontfamily='monospace', fontsize=9)
@@ -71,7 +71,16 @@ def drawSea(location, people, craft_dict):
             fontfamily='monospace', fontsize=6)
     ax.text(0.83, 0.10, "\n".join(craft_dict['Shenzhou 15']),
             fontfamily='monospace', fontsize=6)
-    ax.tick_params(axis='both', which='both', colors='white', labelsize=6)
+    ax.tick_params(axis='both', which='both', colors='white', labelsize=6)"""
+    y_start = 0.37
+    # print the number of people and the names of the people in the bottom left
+    ax.text(0.63, y_start, f"{len(people)} people in the ISS\n", fontsize=16) 
+    for craft, passengers in craft_dict.items():
+        ax.text(0.65, y_start - 0.03, f'{craft}\n', fontsize=12, fontweight=700)
+        ax.text(0.70, y_start - 0.15, "\n".join(passengers), fontsize=9)
+        ax.tick_params(axis='both', which='both', colors='white', labelsize=.1)
+
+    y_start -= 0.2
     # Remove the border
     ax.spines['top'].set_visible(False)
     ax.spines['right'].set_visible(False)
@@ -100,7 +109,7 @@ def drawLand(location, radius, plot_layers, plot_style, people, craft_dict):
         scale_y=.25,
     )
     # print the number of people and the names of the people in the bottom left
-    ax.text(0.63, 
+    """ax.text(0.63, 
             0.17, 
             f"{len(people)} people in the ISS\n", 
             bbox=dict(facecolor='red', alpha=0.5), 
@@ -135,8 +144,15 @@ def drawLand(location, radius, plot_layers, plot_style, people, craft_dict):
             fontfamily = 'monospace', 
             # fontsize=10
             )
-    ax.tick_params(axis='both', which='both', colors='white', labelsize=1)
-
+    ax.tick_params(axis='both', which='both', colors='white', labelsize=1)"""
+    y_start = 0.37
+    # print the number of people and the names of the people in the bottom left
+    ax.text(0.63, y_start, f"{len(people)} people in the ISS\n", fontsize=16) 
+    for craft, passengers in craft_dict.items():
+        ax.text(0.65, y_start - 0.03, f'{craft}\n', fontsize=12, fontweight=700)
+        ax.text(0.70, y_start - 0.15, "\n".join(passengers), fontsize=9)
+        ax.tick_params(axis='both', which='both', colors='white', labelsize=.1)
+        y_start -= 0.2
     plt.show()
     fig.savefig('output.jpg', dpi=100, pad_inches=0) #papertype='letter',bbox_inches='tight',
     
