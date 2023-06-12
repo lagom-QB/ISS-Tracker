@@ -7,7 +7,10 @@ from prettymaps import *
 from matplotlib import pyplot as plt
 from matplotlib import font_manager as fm
 
+from datetime import date
+
 from geopy.geocoders import Nominatim
+from geopy.point import Point
 import warnings
 warnings.filterwarnings('ignore', category=UserWarning, module='matplotlib')
 
@@ -60,23 +63,27 @@ def checkOcean(lat, lon):
 
 def drawSea(location, people, craft_dict):
     print(f"{location} is in the ocean")
+    point = Point(location[0], location[1])
+    geolocator = Nominatim(user_agent="iss")
+    location_n = geolocator.reverse(point, exactly_one=True)
+    
+    plt.title(f"Current location of ISS\n{location_n}", fontsize=10, fontweight=700, fontfamily='monospace')
 
     fig, ax = plt.subplots(figsize=(10, 8))
     ax.set_facecolor('#00aa99')
     # print coordinates at the bottom left
-    ax.text(0.63, 0.97, f"({float(location[0])}, {float(location[1])})",
-            fontfamily='monospace', fontsize=12)
-    ax.text(0.83, 0.95, "In the sea", fontfamily='monospace', fontsize=8)
+    ax.text(0.83, 0.95, f"{date.today()}", fontsize=10, fontweight=700, fontfamily='monospace')
+    ax.text(0.83, 0.90, "In the sea", fontfamily='monospace', fontsize=8)
     ax.tick_params(axis='both', which='both', colors='white', labelsize=6)
 
     y_start = 0.37
     # print the number of people and the names of the people in the bottom left
-    ax.text(0.63, y_start, f"{len(people)} people in the ISS\n", fontsize=16)
+    ax.text(0.63, y_start, f"{len(people)} people in the ISS\n", fontsize=16, fontweight=700, fontfamily='monospace')
     for craft, passengers in craft_dict.items():
-        ax.text(0.65, y_start - 0.03, f'{craft}\n', fontsize=12, fontweight=700)
+        ax.text(0.65, y_start - 0.03, f'{craft}\n', fontsize=12, fontweight=700, fontfamily='monospace')
         for i, passenger in enumerate(passengers):
             text_y = y_start - (0.02 * i)
-            ax.text(0.80, text_y, passenger, fontsize=8)
+            ax.text(0.80, text_y, passenger, fontsize=8, fontfamily='monospace')
         ax.tick_params(axis='both', which='both', colors='white', labelsize=.1)
         y_start -= (0.1 + 0.05 * len(passengers))/2
     
@@ -98,7 +105,7 @@ def drawSea(location, people, craft_dict):
     return #No need to return anything !!!
 
 def drawLand(location, radius, plot_layers, plot_style, people, craft_dict):
-    fig, ax = plt.subplots(figsize=(8, 6))#
+    fig, ax = plt.subplots(figsize=(6, 10))#
     ax.set_axis_off()
     map = plot(
         query = (float(location[0]), float(location[1])),
@@ -108,15 +115,18 @@ def drawLand(location, radius, plot_layers, plot_style, people, craft_dict):
         ax=ax,
         credit=False,
         circle=True,
+        # circle_params=circle_params,
         dilate=True,
-        scale_x=.25,
-        scale_y=.25,
+        scale_x=.75,
+        scale_y=.75,
     )
+
+    ax.set_aspect('equal','box')
 
     geolocator = Nominatim(user_agent="iss")
     location_n = geolocator.reverse(str(location[0]) + ", " + str(location[1]))
     
-    plt.title(location_n)
+    plt.title(f"Current location of ISS\n{location_n}", fontsize=10, fontweight=700, fontfamily='monospace')
     # plt.savefig('output.jpg', dpi=100, pad_inches=0) #papertype='letter',bbox_inches='tight',
     plt.savefig('output.jpg', 
                 dpi=15,
@@ -129,7 +139,7 @@ def drawLand(location, radius, plot_layers, plot_style, people, craft_dict):
 
     return #fig, ax No need to return anything !!!
 
-def drawMapWithPrettymaps(location, radius = 15000):
+def drawMapWithPrettymaps(location, radius = 30000):
     '''Returns a map of the location with prettymaps or Just a blue map and the coordinates if the location is in the ocean'''
     if location is None:
         raise ValueError("Location cannot be None")
@@ -162,57 +172,61 @@ def drawMapWithPrettymaps(location, radius = 15000):
             'width': {
                 'motorway': 5,
                 'trunk': 4,
-                'primary': 3.5,
-                'secondary': 3,
-                'tertiary': 2.5,
-                'residential': 2,
+                'primary': 3.7,
+                'secondary': 3.5,
+                'tertiary': 3.2,
+                'residential': 3,
                 'service': 1.5,
-                'pedestrian': 1,
-                'footway': 1,
+                'pedestrian': 1.2,
+                'footway': 1.2,
             }
         }
         }
     plot_style = {
-        'padding': 0.01,
-        'perimeter': {'fc': '#F2F4CB', 'ec': '#2F3737', 'hatch': 'ooo...','lw': 4, 'zorder': 7},
+        # 'padding': 0.1,
+        'perimeter': {'fc': '#F2F4CB', 
+                      'ec': '#2F3737', 
+                      'hatch': 'ooo...',
+                      'lw': 1, 
+                      'zorder': 7},
         "background": {
             "fc": "#F2F4CB",
             "ec": "#dadbc1",
-            "hatch": "ooo...",
+            "hatch": "o.o.o.",
         },
         "perimeter": {
             "fc": "#F2F4CB",
             "ec": "#dadbc1",
-            "lw": 0,
-            "hatch": "ooo...",
+            "lw": 0.8,
+            "hatch": "o..o..",
         },
         "green": {
             "fc": "#D0F1BF",
             "ec": "#2F3737",
-            "lw": 1,
+            "lw": 1.6,
         },
         "forest": {
             "fc": "#64B96A",
             "ec": "#2F3737",
-            "lw": 1,
+            "lw": 1.6,
         },
         "water": {
             "fc": "#a1e3ff",
             "ec": "#2F3737",
             "hatch": "ooo...",
             "hatch_c": "#85c9e6",
-            "lw": 1,
+            "lw": 1.6,
         },
         "parking": {
             "fc": "#F2F4CB",
             "ec": "#2F3737",
-            "lw": 1,
+            "lw": 1.6,
         },
         "streets": {
             "fc": "#2F3737",
             "ec": "#475657",
             "alpha": 1,
-            "lw": 0,
+            "lw": 0.8,
         },
         "building": {
             "palette": [
@@ -221,7 +235,7 @@ def drawMapWithPrettymaps(location, radius = 15000):
                 "#C5283D"
             ],
             "ec": "#2F3737",
-            "lw": 0.5,
+            "lw": 1.2,
         }}
 
         # Check if the location is in the ocean
