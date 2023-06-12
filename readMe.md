@@ -17,4 +17,4 @@ _Steps_:
 
 ## Current location of the ISS
 
-![ISS Tracker Output Figure](https://raw.githubusercontent.com/lagom-QB/ISS-Tracker/master/output.png)
+![ISS Tracker Output Figure](https://raw.githubusercontent.com/lagom-QB/ISS-Tracker/master/output.jpg)
