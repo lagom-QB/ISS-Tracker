@@ -9,7 +9,7 @@ from matplotlib import font_manager as fm
 
 from geopy.geocoders import Nominatim
 
-plt.rcParams.update({'font.size': 12})
+plt.rcParams.update({'font.family':'sans-serif, monospace'})
 
 def get_iss_position():
     """Get the current position of the ISS"""
@@ -154,7 +154,8 @@ def drawLand(location, radius, plot_layers, plot_style, people, craft_dict):
         ax.tick_params(axis='both', which='both', colors='white', labelsize=.1)
         y_start -= 0.2
     plt.show()
-    fig.savefig('output.jpg', dpi=100, pad_inches=0) #papertype='letter',bbox_inches='tight',
+    plt.savefig('output.jpg', dpi=300, bbox_inches='tight', pad_inches=0)
+    # fig.savefig('output.jpg', dpi=100, pad_inches=0) #papertype='letter',bbox_inches='tight',
     
     return #fig, ax No need to return anything !!!
 
