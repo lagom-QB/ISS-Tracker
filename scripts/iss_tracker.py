@@ -8,8 +8,14 @@ from matplotlib import pyplot as plt
 from matplotlib import font_manager as fm
 
 from geopy.geocoders import Nominatim
+import warnings
+warnings.filterwarnings('ignore', category=UserWarning, module='matplotlib')
 
-plt.rcParams.update({'font.family':'sans-serif, monospace'})
+plt.rcParams.update({'font.family': ['Arial Unicode MS',
+                                     'sans-serif'],
+                     'font.monospace': ['Courier New',
+                                        'Terminal',
+                                        'monospace']})
 
 def get_iss_position():
     """Get the current position of the ISS"""
@@ -51,7 +57,7 @@ def checkOcean(lat, lon):
             else:
                 # print(f"Attempt: {attempt_count}, \n Address: {curr_location.address}, \n Not in ocean")
                 return False
-            
+
 def drawSea(location, people, craft_dict):
     print(f"{location} is in the ocean")
 
@@ -62,36 +68,34 @@ def drawSea(location, people, craft_dict):
             fontfamily='monospace', fontsize=12)
     ax.text(0.83, 0.95, "In the sea", fontfamily='monospace', fontsize=8)
     ax.tick_params(axis='both', which='both', colors='white', labelsize=6)
-    # print the number of people and the names of the people in the bottom left
-    """ax.text(0.63, 0.17, f"{len(people)} people in the ISS\n",
-            fontfamily='monospace', fontsize=10)
-    ax.text(0.63, 0.14, "ISS\n", fontfamily='monospace', fontsize=9)
-    ax.text(0.83, 0.14, "Shenzhou 15\n", fontfamily='monospace', fontsize=9)
-    ax.text(0.63, 0.02, "\n".join(craft_dict['ISS']),
-            fontfamily='monospace', fontsize=6)
-    ax.text(0.83, 0.10, "\n".join(craft_dict['Shenzhou 15']),
-            fontfamily='monospace', fontsize=6)
-    ax.tick_params(axis='both', which='both', colors='white', labelsize=6)"""
+
     y_start = 0.37
     # print the number of people and the names of the people in the bottom left
-    ax.text(0.63, y_start, f"{len(people)} people in the ISS\n", fontsize=16) 
+    ax.text(0.63, y_start, f"{len(people)} people in the ISS\n", fontsize=16)
     for craft, passengers in craft_dict.items():
         ax.text(0.65, y_start - 0.03, f'{craft}\n', fontsize=12, fontweight=700)
-        ax.text(0.70, y_start - 0.15, "\n".join(passengers), fontsize=9)
+        for i, passenger in enumerate(passengers):
+            text_y = y_start - (0.02 * i)
+            ax.text(0.80, text_y, passenger, fontsize=8)
         ax.tick_params(axis='both', which='both', colors='white', labelsize=.1)
-
-    y_start -= 0.2
+        y_start -= (0.1 + 0.05 * len(passengers))/2
+    
     # Remove the border
     ax.spines['top'].set_visible(False)
     ax.spines['right'].set_visible(False)
     ax.spines['bottom'].set_visible(False)
     ax.spines['left'].set_visible(False)
 
-    plt.savefig('output.jpg', dpi=10, bbox_inches='tight', pad_inches=0,
-                facecolor='auto', edgecolor='auto')
+    plt.savefig('output.jpg', 
+                dpi=300,
+                bbox_inches='tight',
+                pad_inches=0,
+                facecolor='auto',
+                edgecolor='auto')
+                # papertype='letter')
     plt.show()
 
-    return #fig, ax No need to return anything !!!
+    return #No need to return anything !!!
 
 def drawLand(location, radius, plot_layers, plot_style, people, craft_dict):
     fig, ax = plt.subplots(figsize=(8, 6))#
@@ -108,55 +112,21 @@ def drawLand(location, radius, plot_layers, plot_style, people, craft_dict):
         scale_x=.25,
         scale_y=.25,
     )
-    # print the number of people and the names of the people in the bottom left
-    """ax.text(0.63, 
-            0.17, 
-            f"{len(people)} people in the ISS\n", 
-            bbox=dict(facecolor='red', alpha=0.5), 
-            fontfamily = 'monospace', 
-            # fontsize=14
-             )#,fontsize=16
-    ax.text(0.63, 
-            0.14, 
-            f'ISS\n' ,
-            bbox=dict(facecolor='red', alpha=0.5), 
-            fontfamily = 'monospace', 
-            # fontsize=12
-            )#fontsize=14
-    ax.text(0.83, 
-            0.14, 
-            f'Shenzhou 15\n' ,
-            bbox=dict(facecolor='red', alpha=0.5), 
-            fontfamily = 'monospace', 
-            # fontsize=12
-            )#fontsize=14
-    ax.text(0.63, 
-            0.02, 
-            "\n".join(craft_dict['ISS']) ,
-            bbox=dict(facecolor='red', alpha=0.5), 
-            fontfamily = 'monospace', 
-            # fontsize=10
-            )#fontsize=9
-    ax.text(0.83, 
-            0.10, 
-            "\n".join(craft_dict['Shenzhou 15']) ,
-            bbox=dict(facecolor='red', alpha=0.5), 
-            fontfamily = 'monospace', 
-            # fontsize=10
-            )
-    ax.tick_params(axis='both', which='both', colors='white', labelsize=1)"""
-    y_start = 0.37
-    # print the number of people and the names of the people in the bottom left
-    ax.text(0.63, y_start, f"{len(people)} people in the ISS\n", fontsize=16) 
-    for craft, passengers in craft_dict.items():
-        ax.text(0.65, y_start - 0.03, f'{craft}\n', fontsize=12, fontweight=700)
-        ax.text(0.70, y_start - 0.15, "\n".join(passengers), fontsize=9)
-        ax.tick_params(axis='both', which='both', colors='white', labelsize=.1)
-        y_start -= 0.2
-    plt.show()
-    plt.savefig('output.jpg', dpi=300, bbox_inches='tight', pad_inches=0)
-    # fig.savefig('output.jpg', dpi=100, pad_inches=0) #papertype='letter',bbox_inches='tight',
+
+    geolocator = Nominatim(user_agent="iss")
+    location_n = geolocator.reverse(str(location[0]) + ", " + str(location[1]))
     
+    plt.title(location_n)
+    # plt.savefig('output.jpg', dpi=100, pad_inches=0) #papertype='letter',bbox_inches='tight',
+    plt.savefig('output.jpg', 
+                dpi=15,
+                bbox_inches='tight',
+                pad_inches=0,
+                facecolor='auto',
+                edgecolor='auto')
+                # papertype='letter')
+    plt.show()
+
     return #fig, ax No need to return anything !!!
 
 def drawMapWithPrettymaps(location, radius = 15000):
@@ -278,5 +248,4 @@ location = get_iss_position()
 
 drawMapWithPrettymaps(location)
 # img, ax = drawMapWithPrettymaps(location)
-# img.savefig('output.jpg', dpi=10,  bbox_inches='tight', pad_inches=1,
-#           facecolor='auto', edgecolor='auto', orientation='landsca #papertype='letter',pe')
+# img.savefig('output.jpg', dpi=10,  bbox_inches='tight', pad_inches=1,facecolor='auto', edgecolor='auto', orientation='landscape', papertype='letter')
