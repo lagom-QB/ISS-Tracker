@@ -108,7 +108,7 @@ def drawSea(location, people, craft_dict):
                 facecolor='auto',
                 edgecolor='auto')
                 # papertype='letter')
-    plt.show()
+    #plt.show()
 
     return #No need to return anything !!!
 
@@ -143,7 +143,7 @@ def drawLand(location, radius, plot_layers, plot_style, people, craft_dict):
                 facecolor='auto',
                 edgecolor='auto')
                 # papertype='letter')
-    plt.show()
+    #plt.show()
 
     return #fig, ax No need to return anything !!!
 
