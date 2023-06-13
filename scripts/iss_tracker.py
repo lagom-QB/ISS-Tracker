@@ -107,10 +107,9 @@ def drawSea(location, people, craft_dict):
                 pad_inches=0,
                 facecolor='auto',
                 edgecolor='auto')
-                # papertype='letter')
     #plt.show()
 
-    return #No need to return anything !!!
+    #return No need to return anything !!!
 
 def drawLand(location, radius, plot_layers, plot_style, people, craft_dict):
     fig, ax = plt.subplots(figsize=(6, 10))#
@@ -135,17 +134,15 @@ def drawLand(location, radius, plot_layers, plot_style, people, craft_dict):
     location_n = geolocator.reverse(str(location[0]) + ", " + str(location[1]))
     
     plt.title(f"Current location of ISS\n{location_n}", fontsize=10, fontweight=700, fontfamily='monospace')
-    # plt.savefig('output.jpg', dpi=100, pad_inches=0) #papertype='letter',bbox_inches='tight',
     plt.savefig('output.jpg', 
                 dpi=15,
                 bbox_inches='tight',
                 pad_inches=0,
                 facecolor='auto',
                 edgecolor='auto')
-                # papertype='letter')
     #plt.show()
 
-    return #fig, ax No need to return anything !!!
+    # return fig, ax No need to return anything !!!
 
 def drawMapWithPrettymaps(location, radius = 30000):
     '''Returns a map of the location with prettymaps or Just a blue map and the coordinates if the location is in the ocean'''
