@@ -7,7 +7,7 @@ from prettymaps import *
 from matplotlib import pyplot as plt
 from matplotlib import font_manager as fm
 
-from datetime import date
+from datetime import date, datetime
 
 from geopy.geocoders import Nominatim
 from geopy.point import Point
@@ -72,7 +72,15 @@ def drawSea(location, people, craft_dict):
     fig, ax = plt.subplots(figsize=(10, 8))
     ax.set_facecolor('#00aa99')
     # print coordinates at the bottom left
-    ax.text(0.83, 0.95, f"{date.today()}", fontsize=10, fontweight=700, fontfamily='monospace')
+
+    # Get the current date and time
+    current_date_time = datetime.now()
+
+    # Extract the date and time components
+    current_date = current_date_time.date()
+    current_time = current_date_time.time()
+    
+    ax.text(0.83, 0.95, f"{current_date}  {current_time}", fontsize=10, fontweight=700, fontfamily='monospace')
     ax.text(0.83, 0.90, "In the sea", fontfamily='monospace', fontsize=8)
     ax.tick_params(axis='both', which='both', colors='white', labelsize=6)
 
