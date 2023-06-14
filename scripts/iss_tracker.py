@@ -101,7 +101,7 @@ def drawSea(location, people, craft_dict):
     ax.spines['bottom'].set_visible(False)
     ax.spines['left'].set_visible(False)
 
-    plt.savefig('output.jpg', 
+    plt.savefig('../output.jpg', 
                 dpi=300,
                 bbox_inches='tight',
                 pad_inches=0,
@@ -134,7 +134,7 @@ def drawLand(location, radius, plot_layers, plot_style, people, craft_dict):
     location_n = geolocator.reverse(str(location[0]) + ", " + str(location[1]))
     
     plt.title(f"Current location of ISS\n{location_n}", fontsize=10, fontweight=700, fontfamily='monospace')
-    plt.savefig('output.jpg', 
+    plt.savefig('../output.jpg', 
                 dpi=15,
                 bbox_inches='tight',
                 pad_inches=0,
